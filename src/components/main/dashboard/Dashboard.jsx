@@ -14,19 +14,21 @@ export const Dashboard = ({ isOnMobile }) => {
   const [editRequest, setEditRequest] = useState(false);
   const [currentRequest, setCurrentRequest] = useState(null);
   const [eventApproved, setEventApproved] = useState(false);
+  const [count, setCount] = useState(0);
 
   const handleOnEditRequest = (request) => {
     setEditRequest((editRequest) => !editRequest);
     setCurrentRequest(request);
   };
 
-  console.log(currentRequest);
-
   const handleOnEventApproved = () => {
     setEventApproved((eventApproved) => !eventApproved);
   };
 
   useEffect(() => {
+    setInterval(() => {
+      setCount((count) => (count += 1));
+    }, 300000);
     const fetchAllRequest = async () => {
       try {
         const response = await axios.get(REQUEST_URL);
@@ -39,7 +41,7 @@ export const Dashboard = ({ isOnMobile }) => {
     };
 
     fetchAllRequest();
-  }, [eventApproved]);
+  }, [eventApproved, count]);
 
   return (
     <div className="dashboard">
