@@ -1,0 +1,100 @@
+nav {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    height: 100%;
+    z-index: 9999;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.dash-tab {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* SWIFTDOCS */
+.sd {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.sd span {
+    color: gray;
+    font-size: 10px;
+    font-weight: 500;
+    margin-left: 3px;
+}
+
+.app-name {
+    margin-left: 15px;
+}
+
+/* TOP NAV */
+
+.top-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 120px;
+}
+
+.tab {
+    margin-top: 30px;
+    background-color: #5932ea;
+    color: white;
+    padding: 13px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-logo {
+    margin-right: 15px;
+}
+
+.tab p {
+    font-size: 15px;
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+.tab div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-tab {
+    display: grid;
+    grid-template-columns: 50px auto;
+    align-items: center;
+}
+
+.profile-right {
+    align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.role {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.sub-role {
+    font-size: 12px;
+    color: #808080;
+}
+
+.logout:hover {
+    cursor: pointer;
+}

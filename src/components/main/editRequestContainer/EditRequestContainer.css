@@ -1,0 +1,180 @@
+.edit-head-container {
+    background-color: white;
+    padding: 30px 35px;
+    border-radius: 30px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.close-edit:hover {
+    cursor: pointer;
+}
+
+.type-request {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 30px;
+    margin-top: 20px;
+    font-weight: 900;
+}
+
+.type-request span {
+    color: #4095ff;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: #a4deff;
+    padding: 5px 20px;
+    border: 1px solid #4095ff;
+    border-radius: 50px;
+}
+
+.details-container {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    margin-top: 30px;
+    gap: 30px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: white;
+    padding: 30px 35px;
+    border-radius: 30px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    min-height: fit-content;
+    max-height: 3000px;
+}
+
+.details {
+    background-color: white;
+    padding: 30px 35px;
+    border-radius: 30px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.file-name {
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.quantity {
+    margin-top: 10px;
+    color: gray;
+    font-size: 15px;
+}
+
+.quantity span {
+    color: black;
+    font-weight: 600;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.buttons button {
+    width: 50%;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.download {
+    border: none;
+    color: white;
+    background-color: black;
+    transition: all .25s;
+}
+
+.print {
+    border: 1.5px solid black;
+    color: black;
+    background-color: white;
+    transition: all .25s
+}
+
+.download:hover {
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: rgb(50, 50, 50);
+}
+
+.print:hover {
+    cursor: pointer;
+    border: none;
+    color: rgb(0, 0, 0);
+    background-color: rgb(230, 230, 230);
+    border: 1.5px solid black;
+}
+
+.download:active {
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: rgb(30, 30, 30);
+}
+
+.print:active {
+    cursor: pointer;
+    border: none;
+    color: rgb(0, 0, 0);
+    background-color: rgb(242, 242, 242);
+    border: 1.5px solid black;
+}
+
+.details-title {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.details ul {
+    margin: 20px 0;
+}
+
+.details ul li {
+    display: flex;
+    list-style-type: none;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: gray;
+}
+
+.details ul li img {
+    margin-right: 14px;
+}
+
+.requester-name {
+    font-weight: 500;
+    font-size: 14px;
+    margin: 10px 0;
+
+}
+
+.app-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #5932ea;
+    color: white;
+    border: none;
+    transition: all .25s;
+}
+
+.app-btn:hover {
+    cursor: pointer;
+    background-color: #6a46eb;
+}
+
+.app-btn:active {
+    background-color: #8c6ef7;
+}
+
+.dis {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+}

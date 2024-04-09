@@ -1,0 +1,11 @@
+main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 30px 60px;
+    background-color: #f5f8fe;
+}
+
+.greetings {
+    font-weight: 900;
+    margin-bottom: 30px;
+}
