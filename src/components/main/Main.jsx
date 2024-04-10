@@ -7,7 +7,10 @@ import './Main.css';
 export const Main = ({ isOnMobile }) => {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  const fName = currentUser.user.firstName
+  const role = JSON.parse(localStorage.getItem('role')).role;
+  const fName = currentUser[
+    `${role == 'student' ? role : 'user'}`
+  ].firstName
     .split('')
     .map((c, i) => (i == 0 ? c.toUpperCase() : c))
     .join('');
@@ -23,12 +26,18 @@ export const Main = ({ isOnMobile }) => {
         Hello {fName}!
       </h1>
 
-      {currentPage == 'dashboard' && (
-        <Dashboard isOnMobile={isOnMobile} />
+      {role == 'student' ? (
+        <p>student</p>
+      ) : (
+        <>
+          {currentPage == 'dashboard' && (
+            <Dashboard isOnMobile={isOnMobile} />
+          )}
+          {currentPage == 'coe' && <p>coe </p>}
+          {currentPage == 'cor' && <p>cor</p>}
+          {currentPage == 'cog' && <p>cog</p>}
+        </>
       )}
-      {currentPage == 'coe' && <p>coe </p>}
-      {currentPage == 'cor' && <p>cor</p>}
-      {currentPage == 'cog' && <p>cog</p>}
     </main>
   );
 };

@@ -13,7 +13,7 @@ export const Intro = () => {
         /> */}
         <p className="sd-main-title">Sias Connect</p>
         <p>Manage your files with ease.</p>
-        <Link className="intro-button" to="/login">
+        <Link className="intro-button" to="/postintro">
           Get Started
         </Link>
       </div>

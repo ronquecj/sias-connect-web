@@ -2,14 +2,16 @@ import './Navbar.css';
 import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
+  const role = JSON.parse(localStorage.getItem('role')).role;
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  const id =
-    currentUser.user._id.slice(0, 5) +
-    '************' +
-    currentUser.user._id.slice(
-      20,
-      currentUser.user._id.split('').length - 1
-    );
+  let id = currentUser[role == 'student' ? role : 'user'];
+  id = id[role == 'student' ? 'studentID' : 'schoolID'];
+  let cname = `${
+    currentUser[role == 'student' ? role : 'user'].firstName
+  } ${currentUser[role == 'student' ? role : 'user'].lastName}`;
+  let adminRole = currentUser[role == 'student' ? role : 'user'];
+
+  console.log(id);
 
   const navigate = useNavigate();
 
@@ -22,7 +24,7 @@ export const Navbar = () => {
         <img
           src="temp-icon.png"
           alt="swift-docs-icon"
-          width={'30px'}
+          width={'1.875rem'}
         />
         <h1 className="app-name">
           Swift Docs <span>v.01</span>
@@ -49,19 +51,41 @@ export const Navbar = () => {
         </div>
         <div className="profile-tab">
           <img
-            src="profile-pic.jpg"
+            src="prmsu-logo.png"
             alt="profile-pic"
             style={{
               borderRadius: '50%',
               objectFit: 'cover',
-              width: '40px',
-              height: '40px',
+              width: '2.5rem',
+              height: '2.5rem',
             }}
           />
           <div className="profile-right">
             <div className="profile-info">
-              <p className="role">Admin</p>
-              <p className="sub-role">{id}</p>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                <p className="role">
+                  {role == 'student'
+                    ? 'Student'
+                    : `${adminRole.role}`}
+                </p>{' '}
+                <p
+                  style={{
+                    fontSize: '12px',
+                    color: '#909090',
+                    fontWeight: '400',
+                    marginLeft: '10px',
+                  }}
+                >
+                  {id}
+                </p>
+              </div>
+              <p className="sub-role">{cname}</p>
             </div>
             <img
               width="25"

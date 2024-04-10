@@ -11,13 +11,15 @@ import { Login } from './components/login/Login.jsx';
 import { Signup } from './components/signup/Signup.jsx';
 import { MainDashboard } from './components/main-dashboard/MainDashboard.jsx';
 import { PdfViewer } from './components/PdfViewer.jsx';
+import { PostIntro } from './components/postintro/PostIntro.jsx';
 
 const router = createBrowserRouter([
   { path: '/', element: <App /> },
-  { path: '/login', element: <Login /> },
-  { path: '/signup', element: <Signup /> },
+  { path: '/login/:role', element: <Login /> },
+  { path: '/signup/:role', element: <Signup /> },
   { path: '/dashboard', element: <MainDashboard /> },
   { path: '/print', element: <PdfViewer /> },
+  { path: '/postintro', element: <PostIntro /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

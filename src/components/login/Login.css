@@ -52,8 +52,6 @@
     left: -400px;
 }
 
-
-
 h4 {
     margin-bottom: 40px;
 }
@@ -138,6 +136,20 @@ h4 {
     margin-top: 10px;
 }
 
+.dob {
+    width: 167px !important;
+}
+
+
+.select-role {
+    padding: 10px;
+    border: none;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    background-color: #eff4f8;
+    width: 167px;
+    padding-right: 10px !important;
+}
 
 /* LOADER */
 .loader {

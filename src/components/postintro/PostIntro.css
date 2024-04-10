@@ -1,0 +1,33 @@
+.post-intro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.button-container {
+    opacity: 0;
+    transition: opacity 3s ease;
+    display: flex;
+    gap: .625rem;
+    margin-top: 30px;
+}
+
+.button-container.show {
+    opacity: 1;
+}
+
+.btn-int {
+    margin-top: 10px;
+    padding: 10px;
+    font-weight: bold;
+    border: none;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.btn-int:hover {
+    cursor: pointer;
+    background-color: rgb(36, 36, 36);
+}

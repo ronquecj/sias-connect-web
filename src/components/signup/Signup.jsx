@@ -1,13 +1,27 @@
-import './Signup.css';
+// import './Signup.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import axios from '../../api/axios.js';
-const REGISTER_URL = 'auth/admin/register';
 
 export const Signup = () => {
-  const [studenID, setStudenID] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [studentID, setStudentID] = useState('');
+  const [schoolID, setSchoolID] = useState('');
+  const [age, setAge] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const [password, setPassword] = useState('');
+  const [gender, setGender] = useState('');
+  const [role, setRole] = useState('Admin');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [year, setYear] = useState(1);
+
+  const crole = JSON.parse(localStorage.getItem('role')).role;
+  const REGISTER_URL = `auth/${
+    crole == 'student' ? 'user' : crole
+  }/register`;
+
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,12 +30,33 @@ export const Signup = () => {
 
     try {
       setIsLoading(true);
-      const response = await axios.post(REGISTER_URL, {
-        studenID,
-        password,
-      });
-
-      if (response.status === 201) navigate('/login');
+      if (crole == 'student') {
+        const response = await axios.post(REGISTER_URL, {
+          firstName,
+          lastName,
+          studentID,
+          age,
+          dateOfBirth,
+          password,
+          gender,
+          role,
+          phoneNumber,
+          year,
+        });
+        if (response.status === 201) navigate(`/login/${crole}`);
+      } else {
+        const response = await axios.post(REGISTER_URL, {
+          firstName,
+          lastName,
+          schoolID,
+          age,
+          dateOfBirth,
+          password,
+          gender,
+          role,
+        });
+        if (response.status === 201) navigate(`/login/${crole}`);
+      }
     } catch (err) {
       console.error(err.response.data.msg);
     } finally {
@@ -64,7 +99,7 @@ export const Signup = () => {
                     name="firstName"
                     placeholder="Enter your first name"
                     required
-                    onChange={(e) => setStudenID(e.target.value)}
+                    onChange={(e) => setFirstName(e.target.value)}
                   />
                 </div>
                 <div className="form-input">
@@ -76,18 +111,64 @@ export const Signup = () => {
                     name="lastName"
                     placeholder="Enter your last name"
                     required
-                    onChange={(e) => setStudenID(e.target.value)}
+                    onChange={(e) => setLastName(e.target.value)}
                   />
                 </div>
               </div>
-              <label htmlFor="">School ID</label>
-              <input
-                type="text"
-                name="studenID"
-                placeholder="Enter your School ID"
-                required
-                onChange={(e) => setStudenID(e.target.value)}
-              />
+              <div
+                className="input-container"
+                style={
+                  crole == 'student'
+                    ? {}
+                    : {
+                        display: 'grid',
+                        gridTemplateRows: 'auto 1fr',
+                      }
+                }
+              >
+                <div className="form-input">
+                  <label htmlFor="">
+                    {crole == 'student' ? 'Student ' : 'School '}ID
+                  </label>
+                  <input
+                    type="text"
+                    name={`${
+                      crole == 'student' ? 'student' : 'school'
+                    }ID`}
+                    placeholder={`Enter your ${
+                      crole == 'student' ? 'Student' : 'School'
+                    } ID`}
+                    required
+                    onChange={(e) =>
+                      crole == 'student'
+                        ? setStudentID(e.target.value)
+                        : setSchoolID(e.target.value)
+                    }
+                  />
+                </div>
+                {crole == 'student' && (
+                  <div className="form-input">
+                    <label htmlFor="" className="form-label">
+                      Year
+                    </label>
+                    <select
+                      className="select-role"
+                      type="text"
+                      name="year"
+                      placeholder="Enter your year"
+                      required
+                      onChange={(e) => setYear(e.target.value)}
+                      value={year}
+                    >
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                      <option value={3}>3</option>
+                      <option value={4}>4</option>
+                    </select>
+                  </div>
+                )}
+              </div>
+
               <div className="input-container">
                 <div className="form-input">
                   <label htmlFor="" className="form-label">
@@ -98,7 +179,7 @@ export const Signup = () => {
                     name="age"
                     placeholder="Enter your age"
                     required
-                    onChange={(e) => setStudenID(e.target.value)}
+                    onChange={(e) => setAge(e.target.value)}
                   />
                 </div>
                 <div className="form-input">
@@ -106,22 +187,22 @@ export const Signup = () => {
                     Date of Birth
                   </label>
                   <input
-                    type="text"
+                    type="date"
                     name="dateOfBirth"
-                    placeholder="Enter your date of birth"
                     required
-                    onChange={(e) => setStudenID(e.target.value)}
+                    onChange={(e) => setDateOfBirth(e.target.value)}
+                    className="dob"
                   />
                 </div>
               </div>
               <label htmlFor="">Password</label>
               <input
                 type="password"
-                name="studenID"
+                name="password"
                 placeholder="Enter your password"
                 required
                 onChange={(e) => setPassword(e.target.value)}
-              />{' '}
+              />
               <div className="input-container">
                 <div className="form-input">
                   <label htmlFor="" className="form-label">
@@ -129,24 +210,45 @@ export const Signup = () => {
                   </label>
                   <input
                     type="text"
-                    name="age"
+                    name="gender"
                     placeholder="Enter your gender"
                     required
-                    onChange={(e) => setStudenID(e.target.value)}
+                    onChange={(e) => setGender(e.target.value)}
                   />
                 </div>
-                <div className="form-input">
-                  <label htmlFor="" className="form-label">
-                    Role
-                  </label>
-                  <input
-                    type="text"
-                    name="dateOfBirth"
-                    placeholder="Enter your School Role"
-                    required
-                    onChange={(e) => setStudenID(e.target.value)}
-                  />
-                </div>
+                {crole == 'student' ? (
+                  <div className="form-input">
+                    <label htmlFor="" className="form-label">
+                      Phone Number
+                    </label>
+                    <input
+                      type="text"
+                      name="phoneNumber"
+                      placeholder="Enter phone number"
+                      required
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
+                  </div>
+                ) : (
+                  <div className="form-input">
+                    <label htmlFor="" className="form-label">
+                      Role
+                    </label>
+                    <select
+                      className="select-role"
+                      type="text"
+                      name="role"
+                      placeholder="Enter your School Role"
+                      required
+                      onChange={(e) => setRole(e.target.value)}
+                      value={role}
+                    >
+                      <option value={'Admin'}>Admin</option>
+                      <option value={'Secretary'}>Secretary</option>
+                      <option value={'Professor'}>Professor</option>
+                    </select>
+                  </div>
+                )}
               </div>
               {isLoading ? (
                 <div className="loader">
@@ -158,7 +260,7 @@ export const Signup = () => {
               <div className="bot-form">
                 <p>
                   Already have an account? Login{' '}
-                  <Link to={'/login'}>
+                  <Link to={`/login/${crole}`}>
                     <span className="l-span">here</span>
                   </Link>
                 </p>
