@@ -9,3 +9,12 @@ main {
     font-weight: 900;
     margin-bottom: 30px;
 }
+
+.notif-icon {
+    transition: all .25s;
+}
+
+.notif-icon:hover {
+    cursor: pointer;
+    background-color: #c8c8c8 !important;
+}

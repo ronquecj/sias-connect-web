@@ -62,7 +62,7 @@ export const Login = () => {
     <>
       <div className="bg-image">
         <img
-          src="prmsu-logo.png"
+          src="/prmsu-logo.png"
           alt="prmsu-logo"
           width={'700px'}
           height={'700px'}

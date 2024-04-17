@@ -16,6 +16,8 @@ export const Signup = () => {
   const [role, setRole] = useState('Admin');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [year, setYear] = useState(1);
+  const [course, setCourse] = useState(1);
+  const [address, setAddress] = useState(1);
 
   const crole = JSON.parse(localStorage.getItem('role')).role;
   const REGISTER_URL = `auth/${
@@ -42,6 +44,8 @@ export const Signup = () => {
           role,
           phoneNumber,
           year,
+          course,
+          address,
         });
         if (response.status === 201) navigate(`/login/${crole}`);
       } else {
@@ -67,7 +71,7 @@ export const Signup = () => {
     <>
       <div className="bg-image">
         <img
-          src="prmsu-logo.png"
+          src="/prmsu-logo.png"
           alt="prmsu-logo"
           width={'700px'}
           height={'700px'}
@@ -168,7 +172,6 @@ export const Signup = () => {
                   </div>
                 )}
               </div>
-
               <div className="input-container">
                 <div className="form-input">
                   <label htmlFor="" className="form-label">
@@ -249,7 +252,35 @@ export const Signup = () => {
                     </select>
                   </div>
                 )}
-              </div>
+              </div>{' '}
+              {crole == 'student' && (
+                <div className="input-container">
+                  <div className="form-input">
+                    <label htmlFor="" className="form-label">
+                      Course
+                    </label>
+                    <input
+                      type="text"
+                      name="course"
+                      placeholder="Enter your course"
+                      required
+                      onChange={(e) => setCourse(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-input">
+                    <label htmlFor="" className="form-label">
+                      Address
+                    </label>
+                    <input
+                      type="text"
+                      name="address"
+                      placeholder="City, Address"
+                      required
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </div>
+                </div>
+              )}
               {isLoading ? (
                 <div className="loader">
                   <div className="line-wobble"></div>

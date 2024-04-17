@@ -14,7 +14,6 @@ export const Pagination = ({ items, onCurrentContent }) => {
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log(event.selected);
     setItemOffset(newOffset);
     onCurrentContent(event.selected);
   };

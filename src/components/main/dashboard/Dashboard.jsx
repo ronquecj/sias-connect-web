@@ -5,43 +5,21 @@ import { Taskcounter } from '../taskCounter/Taskcounter';
 import { EditRequestContainer } from '../editRequestContainer/EditRequestContainer.jsx';
 import './Dashboard.css';
 
-import axios from '../../../api/axios.js';
-import { useEffect, useState } from 'react';
-const REQUEST_URL = '/request';
+import { useState } from 'react';
 
-export const Dashboard = ({ isOnMobile }) => {
-  const [requests, setRequests] = useState([]);
+export const Dashboard = ({
+  isOnMobile,
+  requests,
+  onEventApproved,
+}) => {
+  console.log(requests);
   const [editRequest, setEditRequest] = useState(false);
   const [currentRequest, setCurrentRequest] = useState(null);
-  const [eventApproved, setEventApproved] = useState(false);
-  const [count, setCount] = useState(0);
 
   const handleOnEditRequest = (request) => {
     setEditRequest((editRequest) => !editRequest);
     setCurrentRequest(request);
   };
-
-  const handleOnEventApproved = () => {
-    setEventApproved((eventApproved) => !eventApproved);
-  };
-
-  useEffect(() => {
-    setInterval(() => {
-      setCount((count) => (count += 1));
-    }, 300000);
-    const fetchAllRequest = async () => {
-      try {
-        const response = await axios.get(REQUEST_URL);
-        const data = response.data;
-
-        setRequests(() => [...data]);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchAllRequest();
-  }, [eventApproved, count]);
 
   return (
     <div className="dashboard">
@@ -50,7 +28,7 @@ export const Dashboard = ({ isOnMobile }) => {
         <EditRequestContainer
           onEditRequest={handleOnEditRequest}
           currentRequest={currentRequest}
-          onEventApproved={handleOnEventApproved}
+          onEventApproved={onEventApproved}
         />
       ) : (
         <Requestcontainer

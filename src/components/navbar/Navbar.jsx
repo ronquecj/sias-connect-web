@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
+
 import './Navbar.css';
 import { useNavigate } from 'react-router-dom';
 
-export const Navbar = () => {
+export const Navbar = ({ currentPage, onSetCurrentPage }) => {
   const role = JSON.parse(localStorage.getItem('role')).role;
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   let id = currentUser[role == 'student' ? role : 'user'];
@@ -10,8 +12,6 @@ export const Navbar = () => {
     currentUser[role == 'student' ? role : 'user'].firstName
   } ${currentUser[role == 'student' ? role : 'user'].lastName}`;
   let adminRole = currentUser[role == 'student' ? role : 'user'];
-
-  console.log(id);
 
   const navigate = useNavigate();
 
@@ -27,28 +27,114 @@ export const Navbar = () => {
           width={'1.875rem'}
         />
         <h1 className="app-name">
-          Swift Docs <span>v.01</span>
+          Sias Connect <span>v.01</span>
         </h1>
       </div>
 
       <div className="dash-tab">
-        <div className="tab">
-          <img
-            width="25"
-            height="25"
-            src="https://img.icons8.com/parakeet-line/48/ffffff/name.png"
-            alt="name"
-          />
-          <div>
-            <p>Dashboard</p>
+        <div className="tab-conatiner">
+          <div
+            className={`tab ${
+              currentPage == 'dashboard' ? 'active' : ''
+            }`}
+            onClick={() => onSetCurrentPage('dashboard')}
+          >
             <img
-              width="12"
-              height="12"
-              src="https://img.icons8.com/metro/26/ffffff/forward.png"
-              alt="forward"
+              width="24"
+              height="24"
+              src={`https://img.icons8.com/material-outlined/24/${
+                currentPage == 'dashboard' ? 'ffffff' : '000000'
+              }/control-panel.png`}
+              alt="control-panel"
             />
+            <div>
+              <p>Dashboard</p>
+              <img
+                width="12"
+                height="12"
+                src="https://img.icons8.com/metro/26/ffffff/forward.png"
+                alt="forward"
+              />
+            </div>
           </div>
+          {role == 'student' && (
+            <>
+              <div
+                className={`tab ${
+                  currentPage == 'cog' ? 'active' : ''
+                }`}
+                onClick={() => onSetCurrentPage('cog')}
+              >
+                <img
+                  width="24"
+                  height="24"
+                  src={`https://img.icons8.com/material-outlined/24/${
+                    currentPage == 'cog' ? 'ffffff' : '000000'
+                  }/document--v1.png`}
+                  alt="document--v1"
+                />
+                <div>
+                  <p>Request for COG</p>
+                  <img
+                    width="12"
+                    height="12"
+                    src="https://img.icons8.com/metro/26/ffffff/forward.png"
+                    alt="forward"
+                  />
+                </div>
+              </div>
+              <div
+                className={`tab ${
+                  currentPage == 'cor' ? 'active' : ''
+                }`}
+                onClick={() => onSetCurrentPage('cor')}
+              >
+                <img
+                  width="24"
+                  height="24"
+                  src={`https://img.icons8.com/material-outlined/24/${
+                    currentPage == 'cor' ? 'ffffff' : '000000'
+                  }/document--v1.png`}
+                  alt="document--v1"
+                />
+                <div>
+                  <p>Request for COR</p>
+                  <img
+                    width="12"
+                    height="12"
+                    src="https://img.icons8.com/metro/26/ffffff/forward.png"
+                    alt="forward"
+                  />
+                </div>
+              </div>
+              <div
+                className={`tab ${
+                  currentPage == 'tor' ? 'active' : ''
+                }`}
+                onClick={() => onSetCurrentPage('tor')}
+              >
+                <img
+                  width="24"
+                  height="24"
+                  src={`https://img.icons8.com/material-outlined/24/${
+                    currentPage == 'tor' ? 'ffffff' : '000000'
+                  }/document--v1.png`}
+                  alt="document--v1"
+                />
+                <div>
+                  <p>Request for TOR</p>
+                  <img
+                    width="12"
+                    height="12"
+                    src="https://img.icons8.com/metro/26/ffffff/forward.png"
+                    alt="forward"
+                  />
+                </div>
+              </div>
+            </>
+          )}
         </div>
+
         <div className="profile-tab">
           <img
             src="prmsu-logo.png"

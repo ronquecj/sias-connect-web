@@ -17,7 +17,7 @@ nav {
 /* SWIFTDOCS */
 .sd {
     display: flex;
-    margin-bottom: 30px;
+    margin-bottom: 45px;
 }
 
 .sd span {
@@ -41,13 +41,24 @@ nav {
 }
 
 .tab {
-    margin-top: 30px;
-    background-color: #5932ea;
-    color: white;
+    margin-top: 10px;
+    color: gray;
     padding: 13px;
     border-radius: 10px;
     display: flex;
     align-items: center;
+    transition: all .25s;
+}
+
+.active {
+    background-color: #5932ea;
+    color: white;
+}
+
+.tab:hover {
+    background-color: rgb(131, 99, 249);
+    cursor: pointer;
+    color: white;
 }
 
 .dashboard-logo {
