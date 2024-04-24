@@ -4,11 +4,15 @@ import { useEffect, useState } from 'react';
 import './NotificationContainer.css';
 import { Notification } from './Notification';
 
-export const NotificationContainer = ({ showNotif, notifData }) => {
+export const NotificationContainer = ({
+  dis,
+  notifData,
+  onShowNotif,
+}) => {
   const [s, setS] = useState('');
   useEffect(() => {
     setS('show');
-  }, [showNotif]);
+  }, [dis]);
 
   return (
     <div className={`notification-container ${s}`}>
@@ -19,6 +23,8 @@ export const NotificationContainer = ({ showNotif, notifData }) => {
           height="24"
           src="https://img.icons8.com/forma-bold-filled/24/delete-sign.png"
           alt="delete-sign"
+          className="notif-close"
+          onClick={onShowNotif}
         />
       </div>
       <span
@@ -29,7 +35,7 @@ export const NotificationContainer = ({ showNotif, notifData }) => {
         }}
       >
         {
-          "Note: You can immediately proceed to the registrar's office after having your request approved."
+          "Note: You can immediately proceed to the cashier's office after having your request approved to pay."
         }
       </span>
       <div className="notif-body">

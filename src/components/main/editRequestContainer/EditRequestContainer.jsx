@@ -15,6 +15,7 @@ import {
   UnderlineType,
 } from 'docx';
 import { useState } from 'react';
+import { COR } from '../../../utils/docsPatcher.js';
 export const EditRequestContainer = ({
   currentRequest,
   onEditRequest,
@@ -25,15 +26,15 @@ export const EditRequestContainer = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const requestType =
     currentRequest.type == 'COR'
-      ? 'INDIGENCY'
+      ? 'COR'
       : currentRequest.type == 'COG'
-      ? 'BRGY_CLEARANCE'
+      ? 'COG'
       : currentRequest.type == 'TOR'
-      ? 'RESIDENCY'
-      : 'BS_CLEARANCE';
+      ? 'TOR'
+      : 'COE';
   const navigate = useNavigate();
 
-  console.log(currentRequest.type);
+  console.log(currentRequest);
 
   const timestamp = Number(currentRequest.dateOfRequest);
   const date = new Date(timestamp);
@@ -83,7 +84,6 @@ export const EditRequestContainer = ({
     const monthYear = [date.split(' ')[1], date.split(' ')[3]].join(
       ' '
     );
-    const age = currentRequest.studentData.age;
 
     try {
       const response = await fetch(`${requestType}.docx`);
@@ -96,265 +96,8 @@ export const EditRequestContainer = ({
       let docOb;
 
       switch (requestType) {
-        case 'INDIGENCY':
-          docOb = {
-            patches: {
-              NAME: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.studentData.firstName} ${currentRequest.studentData.lastName}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              PURP: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: currentRequest.purpose,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DAY: {
-                type: PatchType.ParagraphChild,
-                children: [
-                  new TextRun({
-                    text: day,
-                    size: 27,
-                  }),
-                ],
-              },
-              CURRENT_DATE: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: monthYear,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-            },
-          };
-
-          break;
-        case 'BRGY_CLEARANCE':
-          docOb = {
-            patches: {
-              surname: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.studentData.lastName}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              firstname: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.studentData.firstName}, ${age}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              date: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: currentRequest.studentData.dateOfBirth,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DAY: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: day,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DATE: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: monthYear,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DATE_X: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${day} ${monthYear}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-            },
-          };
-          break;
-        case 'RESIDENCY':
-          console.log('resice');
-          docOb = {
-            patches: {
-              NAME_AGE: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.studentData.firstName}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              date: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: currentRequest.studentData.dateOfBirth,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DAY: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: day,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DATE: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: monthYear,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-            },
-          };
-          break;
-        case 'BS_CLEARANCE':
-          console.log('resice');
-          docOb = {
-            patches: {
-              PURP: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.purpose}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              NAME: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.studentData.firstName} ${currentRequest.studentData.lastName}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DATE: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${day} ${monthYear}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-            },
-          };
+        case 'COR':
+          docOb = COR(TextRun, PatchType);
           break;
       }
 
@@ -397,271 +140,23 @@ export const EditRequestContainer = ({
       if (!response.ok) {
         throw new Error('Failed to load file');
       }
+      console.log(requestType);
 
       const fileBuffer = await response.arrayBuffer();
 
       let docOb;
 
-      switch (requestType) {
-        case 'INDIGENCY':
-          docOb = {
-            patches: {
-              NAME: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.studentData.firstName} ${currentRequest.studentData.lastName}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              PURP: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: currentRequest.purpose,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DAY: {
-                type: PatchType.ParagraphChild,
-                children: [
-                  new TextRun({
-                    text: day,
-                    size: 27,
-                  }),
-                ],
-              },
-              CURRENT_DATE: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: monthYear,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-            },
-          };
+      const data = {
+        name: `${currentRequest.studentData.firstName} ${currentRequest.studentData.lastName}`,
+        studentID: currentRequest.studentData.studentID,
+        address: currentRequest.studentData.address,
+        courseYear: `${currentRequest.studentData.course} ${currentRequest.studentData.year}`,
+        semester: currentRequest.currentSemester,
+      };
 
-          break;
-        case 'BRGY_CLEARANCE':
-          docOb = {
-            patches: {
-              surname: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.studentData.lastName}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              firstname: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.studentData.firstName}, ${age}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              date: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: currentRequest.studentData.dateOfBirth,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DAY: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: day,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DATE: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: monthYear,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DATE_X: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${day} ${monthYear}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-            },
-          };
-          break;
-        case 'RESIDENCY':
-          console.log('resice');
-          docOb = {
-            patches: {
-              NAME_AGE: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.studentData.firstName}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              date: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: currentRequest.studentData.dateOfBirth,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DAY: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: day,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DATE: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: monthYear,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-            },
-          };
-          break;
-        case 'BS_CLEARANCE':
-          console.log('resice');
-          docOb = {
-            patches: {
-              PURP: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.purpose}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              NAME: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${currentRequest.studentData.firstName} ${currentRequest.studentData.lastName}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-              DATE: {
-                type: PatchType.PARAGRAPH,
-                children: [
-                  new TextRun({
-                    text: `${day} ${monthYear}`,
-                    size: 27,
-                    bold: true,
-                    underline: {
-                      type: UnderlineType.SINGLE,
-                      color: '000000',
-                    },
-                  }),
-                ],
-              },
-            },
-          };
+      switch (requestType) {
+        case 'COR':
+          docOb = COR(TextRun, PatchType, data);
           break;
       }
 

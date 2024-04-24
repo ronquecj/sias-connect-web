@@ -131,6 +131,30 @@ export const Navbar = ({ currentPage, onSetCurrentPage }) => {
                   />
                 </div>
               </div>
+              <div
+                className={`tab ${
+                  currentPage == 'coe' ? 'active' : ''
+                }`}
+                onClick={() => onSetCurrentPage('coe')}
+              >
+                <img
+                  width="24"
+                  height="24"
+                  src={`https://img.icons8.com/material-outlined/24/${
+                    currentPage == 'coe' ? 'ffffff' : '000000'
+                  }/document--v1.png`}
+                  alt="document--v1"
+                />
+                <div>
+                  <p>Request for COE</p>
+                  <img
+                    width="12"
+                    height="12"
+                    src="https://img.icons8.com/metro/26/ffffff/forward.png"
+                    alt="forward"
+                  />
+                </div>
+              </div>
             </>
           )}
         </div>

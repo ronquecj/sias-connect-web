@@ -37,3 +37,7 @@
 .notif-body {
     margin-top: 30px;
 }
+
+.notif-close:hover {
+    cursor: pointer;
+}

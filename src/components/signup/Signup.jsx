@@ -274,7 +274,7 @@ export const Signup = () => {
                     <input
                       type="text"
                       name="address"
-                      placeholder="City, Address"
+                      placeholder="Brgy, City, Province"
                       required
                       onChange={(e) => setAddress(e.target.value)}
                     />

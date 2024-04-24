@@ -45,6 +45,7 @@
 .sd-main-title {
     font-size: 11vw;
     font-weight: 600;
+    letter-spacing: -5px;
 }
 
 :root {

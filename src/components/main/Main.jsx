@@ -14,7 +14,7 @@ export const Main = ({
   onSetCurrentPage,
 }) => {
   const [requests, setRequests] = useState([]);
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   const [eventApproved, setEventApproved] = useState(false);
   const role = JSON.parse(localStorage.getItem('role')).role;
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -37,13 +37,13 @@ export const Main = ({
   };
 
   const handleShowNotif = () => {
-    setShowNotif(true);
+    setShowNotif((showNotif) => !showNotif);
   };
 
   useEffect(() => {
-    setInterval(() => {
-      setCount((count) => (count += 1));
-    }, 300000);
+    // setInterval(() => {
+    //   setCount((count) => (count += 1));
+    // }, 300000);
     const fetchAllRequest = async () => {
       try {
         const response = await axios.get(
@@ -65,7 +65,8 @@ export const Main = ({
     };
 
     fetchAllRequest(); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [eventApproved, count]);
+  }, [eventApproved]);
+  // }, [eventApproved, count]);
 
   return (
     <>
@@ -73,6 +74,7 @@ export const Main = ({
         <NotificationContainer
           dis={showNotif}
           notifData={notifData}
+          onShowNotif={handleShowNotif}
         />
       )}
       <main
@@ -134,6 +136,13 @@ export const Main = ({
             {currentPage == 'cog' && (
               <Request
                 type={'Certificate of Grades'}
+                onEventApproved={handleOnEventApproved}
+                onSetCurrentPage={onSetCurrentPage}
+              />
+            )}
+            {currentPage == 'coe' && (
+              <Request
+                type={'Certificate of Enrollment'}
                 onEventApproved={handleOnEventApproved}
                 onSetCurrentPage={onSetCurrentPage}
               />

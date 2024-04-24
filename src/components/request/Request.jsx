@@ -47,15 +47,6 @@ export const Request = ({
           <div className="title">
             <h3>Request</h3>
           </div>
-
-          <img
-            width="24"
-            height="24"
-            src="https://img.icons8.com/material-rounded/24/delete-sign.png"
-            alt="delete-sign"
-            style={{ marginTop: '10px' }}
-            className="close-edit"
-          />
         </div>
         <p className="type-request">
           {type}

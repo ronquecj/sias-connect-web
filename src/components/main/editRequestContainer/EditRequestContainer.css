@@ -29,6 +29,7 @@
 }
 
 .details-container {
+
     display: grid;
     grid-template-columns: 1fr 400px;
     margin-top: 30px;
@@ -48,10 +49,14 @@
 }
 
 .details {
-    background-color: white;
+    background-color: white !important;
     padding: 30px 35px;
     border-radius: 30px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.details ul li {
+    background-color: white !important;
 }
 
 .file-name {

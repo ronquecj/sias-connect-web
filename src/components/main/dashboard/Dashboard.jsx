@@ -12,7 +12,6 @@ export const Dashboard = ({
   requests,
   onEventApproved,
 }) => {
-  console.log(requests);
   const [editRequest, setEditRequest] = useState(false);
   const [currentRequest, setCurrentRequest] = useState(null);
 
