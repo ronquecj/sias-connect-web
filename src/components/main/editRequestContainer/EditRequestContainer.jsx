@@ -83,10 +83,26 @@ export const EditRequestContainer = ({
       const fileBuffer = await response.arrayBuffer();
 
       let docOb;
+      const data = {
+        name: `${currentRequest.studentData.firstName} ${currentRequest.studentData.lastName}`,
+        studentID: currentRequest.studentData.studentID,
+        address: currentRequest.studentData.address,
+        courseYear: `${currentRequest.studentData.course} ${currentRequest.studentData.year}`,
+        semester: currentRequest.currentSemester,
+      };
 
       switch (requestType) {
         case 'COR':
-          docOb = COR(TextRun, PatchType);
+          docOb = COR(TextRun, PatchType, data);
+          break;
+        case 'TOR':
+          docOb = TOR(TextRun, PatchType, data);
+          break;
+        case 'COG':
+          docOb = COG(TextRun, PatchType, data);
+          break;
+        case 'COE':
+          docOb = COE(TextRun, PatchType, data);
           break;
       }
 
