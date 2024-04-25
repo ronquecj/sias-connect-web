@@ -8,14 +8,9 @@ const APPROVE_URL = 'request/approve/';
 const DELETE_URL = 'request/delete/';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  patchDocument,
-  PatchType,
-  TextRun,
-  UnderlineType,
-} from 'docx';
+import { patchDocument, PatchType, TextRun } from 'docx';
 import { useState } from 'react';
-import { COR } from '../../../utils/docsPatcher.js';
+import { COE, COG, COR, TOR } from '../../../utils/docsPatcher.js';
 export const EditRequestContainer = ({
   currentRequest,
   onEditRequest,
@@ -79,12 +74,6 @@ export const EditRequestContainer = ({
   };
 
   const downloadFile = async () => {
-    const date = new Date().toDateString();
-    const day = date.split(' ')[2];
-    const monthYear = [date.split(' ')[1], date.split(' ')[3]].join(
-      ' '
-    );
-
     try {
       const response = await fetch(`${requestType}.docx`);
       if (!response.ok) {
@@ -128,13 +117,6 @@ export const EditRequestContainer = ({
   };
 
   const handleOnPrint = async () => {
-    const date = new Date().toDateString();
-    const day = date.split(' ')[2];
-    const monthYear = [date.split(' ')[1], date.split(' ')[3]].join(
-      ' '
-    );
-    const age = currentRequest.studentData.age;
-
     try {
       const response = await fetch(`${requestType}.docx`);
       if (!response.ok) {
@@ -157,6 +139,15 @@ export const EditRequestContainer = ({
       switch (requestType) {
         case 'COR':
           docOb = COR(TextRun, PatchType, data);
+          break;
+        case 'TOR':
+          docOb = TOR(TextRun, PatchType, data);
+          break;
+        case 'COG':
+          docOb = COG(TextRun, PatchType, data);
+          break;
+        case 'COE':
+          docOb = COE(TextRun, PatchType, data);
           break;
       }
 

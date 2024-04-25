@@ -92,22 +92,24 @@ export const Main = ({
           <h1 className="greetings" style={{ marginBottom: '0' }}>
             Hello {fName}!
           </h1>
-          <div
-            className="notif-icon"
-            style={{
-              backgroundColor: '#DFE6E1',
-              padding: '7px 10px',
-              borderRadius: '100px',
-            }}
-            onClick={handleShowNotif}
-          >
-            <img
-              width="24"
-              height="24"
-              src="https://img.icons8.com/material-rounded/24/appointment-reminders.png"
-              alt="appointment-reminders"
-            />
-          </div>
+          {role == 'student' && (
+            <div
+              className="notif-icon"
+              style={{
+                backgroundColor: '#DFE6E1',
+                padding: '7px 10px',
+                borderRadius: '100px',
+              }}
+              onClick={handleShowNotif}
+            >
+              <img
+                width="24"
+                height="24"
+                src="https://img.icons8.com/material-rounded/24/appointment-reminders.png"
+                alt="appointment-reminders"
+              />
+            </div>
+          )}
         </div>
 
         {role == 'student' ? (

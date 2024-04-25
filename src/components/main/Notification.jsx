@@ -9,6 +9,8 @@ export const Notification = ({ nData }) => {
       ? 'Certificate of Registration'
       : nData.type == 'COG'
       ? 'Certificate of Grades'
+      : nData.type == 'COE'
+      ? 'Certificate of Enrollment'
       : 'Transcript of Records'
   }`;
   return (
