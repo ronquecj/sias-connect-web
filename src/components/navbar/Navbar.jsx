@@ -10,7 +10,9 @@ export const Navbar = ({ currentPage, onSetCurrentPage }) => {
   id = id[role == 'student' ? 'studentID' : 'schoolID'];
   let cname = `${
     currentUser[role == 'student' ? role : 'user'].firstName
-  } ${currentUser[role == 'student' ? role : 'user'].lastName}`;
+  } ${currentUser[role == 'student' ? role : 'user'].middleName} ${
+    currentUser[role == 'student' ? role : 'user'].lastName
+  }`;
   let adminRole = currentUser[role == 'student' ? role : 'user'];
 
   const navigate = useNavigate();

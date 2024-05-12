@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
 
 export const List = ({ request, onEditRequest }) => {
-  const fullName = `${request.studentData.firstName} ${request.studentData.lastName}`;
+  const fullName = `${request.studentData.firstName} ${
+    request.studentData.middleName != undefined
+      ? request.studentData.middleName
+      : ''
+  } ${request.studentData.lastName}`;
 
   return (
     <tr

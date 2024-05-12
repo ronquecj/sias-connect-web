@@ -6,6 +6,7 @@ import axios from '../../api/axios.js';
 
 export const Signup = () => {
   const [firstName, setFirstName] = useState('');
+  const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
   const [studentID, setStudentID] = useState('');
   const [schoolID, setSchoolID] = useState('');
@@ -35,6 +36,7 @@ export const Signup = () => {
       if (crole == 'student') {
         const response = await axios.post(REGISTER_URL, {
           firstName,
+          middleName,
           lastName,
           studentID,
           age,
@@ -51,6 +53,7 @@ export const Signup = () => {
       } else {
         const response = await axios.post(REGISTER_URL, {
           firstName,
+          middleName,
           lastName,
           schoolID,
           age,
@@ -131,25 +134,18 @@ export const Signup = () => {
                 }
               >
                 <div className="form-input">
-                  <label htmlFor="">
-                    {crole == 'student' ? 'Student ' : 'School '}ID
+                  <label htmlFor="" className="form-label">
+                    Middle Name
                   </label>
                   <input
                     type="text"
-                    name={`${
-                      crole == 'student' ? 'student' : 'school'
-                    }ID`}
-                    placeholder={`Enter your ${
-                      crole == 'student' ? 'Student' : 'School'
-                    } ID`}
+                    name="middleName"
+                    placeholder="Enter your middle name"
                     required
-                    onChange={(e) =>
-                      crole == 'student'
-                        ? setStudentID(e.target.value)
-                        : setSchoolID(e.target.value)
-                    }
+                    onChange={(e) => setMiddleName(e.target.value)}
                   />
                 </div>
+
                 {crole == 'student' && (
                   <div className="form-input">
                     <label htmlFor="" className="form-label">
@@ -172,6 +168,24 @@ export const Signup = () => {
                   </div>
                 )}
               </div>
+              <label htmlFor="">
+                {crole == 'student' ? 'Student ' : 'School '}ID
+              </label>
+              <input
+                type="text"
+                name={`${
+                  crole == 'student' ? 'student' : 'school'
+                }ID`}
+                placeholder={`Enter your ${
+                  crole == 'student' ? 'Student' : 'School'
+                } ID`}
+                required
+                onChange={(e) =>
+                  crole == 'student'
+                    ? setStudentID(e.target.value)
+                    : setSchoolID(e.target.value)
+                }
+              />
               <div className="input-container">
                 <div className="form-input">
                   <label htmlFor="" className="form-label">
@@ -211,13 +225,18 @@ export const Signup = () => {
                   <label htmlFor="" className="form-label">
                     Gender
                   </label>
-                  <input
+                  <select
+                    className="select-role"
                     type="text"
                     name="gender"
                     placeholder="Enter your gender"
                     required
                     onChange={(e) => setGender(e.target.value)}
-                  />
+                    value={gender}
+                  >
+                    <option value={'male'}>Male</option>
+                    <option value={'female'}>Female</option>
+                  </select>
                 </div>
                 {crole == 'student' ? (
                   <div className="form-input">
@@ -228,6 +247,7 @@ export const Signup = () => {
                       type="text"
                       name="phoneNumber"
                       placeholder="Enter phone number"
+                      maxLength="11"
                       required
                       onChange={(e) => setPhoneNumber(e.target.value)}
                     />
@@ -259,13 +279,21 @@ export const Signup = () => {
                     <label htmlFor="" className="form-label">
                       Course
                     </label>
-                    <input
+                    <select
+                      className="select-role"
                       type="text"
                       name="course"
                       placeholder="Enter your course"
                       required
                       onChange={(e) => setCourse(e.target.value)}
-                    />
+                      value={course}
+                    >
+                      <option value={'BSBA'}>BSBA</option>
+                      <option value={'BEED'}>BEED</option>
+                      <option value={'CTE'}>CTE</option>
+                      <option value={'BSCS'}>BSCS</option>
+                      <option value={'BSED'}>BSED</option>
+                    </select>
                   </div>
                   <div className="form-input">
                     <label htmlFor="" className="form-label">
@@ -274,7 +302,7 @@ export const Signup = () => {
                     <input
                       type="text"
                       name="address"
-                      placeholder="Brgy, City, Province"
+                      placeholder="Town, Brgy, Province"
                       required
                       onChange={(e) => setAddress(e.target.value)}
                     />
